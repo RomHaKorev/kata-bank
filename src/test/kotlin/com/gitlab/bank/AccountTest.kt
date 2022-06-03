@@ -5,7 +5,15 @@ import org.junit.jupiter.api.Test
 
 
 class Account {
-    val amount = Amount(0.0)
+
+    private val deposits = mutableListOf<Deposit>()
+
+    val amount: Amount
+        get() = deposits.fold(Amount(0.0)) { acc, deposit -> Amount(acc.value + deposit.amount.value)}
+
+    fun make(deposit: Deposit) {
+        deposits.add(deposit)
+    }
 }
 
 class AccountTest {
@@ -18,11 +26,10 @@ class AccountTest {
 
     @Test
     fun `a deposit should increase the amount of an account`() {
-        TODO("need deposit")
-        /*val account = Account()
+        val account = Account()
 
-        account.`make`(Deposit.of(12.0))
+        account.make(Deposit(of= Amount(12.0)))
 
-        assertThat(account.amount).isEqualTo(Amount(12.0))*/
+        assertThat(account.amount).isEqualTo(Amount(12.0))
     }
 }
