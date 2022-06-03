@@ -3,10 +3,6 @@ package com.gitlab.bank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class Deposit(of: Amount) {
-    val amount = of
-}
-
 class DepositTest {
     @Test
     fun `create a deposit of a given amount`() {
