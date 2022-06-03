@@ -15,4 +15,14 @@ class AccountTest {
         val account = Account()
         assertThat(account.amount).isEqualTo(Amount(0.0))
     }
+
+    @Test
+    fun `a deposit should increase the amount of an account`() {
+        TODO("need deposit")
+        /*val account = Account()
+
+        account.`make`(Deposit.of(12.0))
+
+        assertThat(account.amount).isEqualTo(Amount(12.0))*/
+    }
 }
