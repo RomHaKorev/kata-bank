@@ -4,8 +4,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 
-data class Amount(val value: Double)
-
 class AmountTest {
     @Test
     fun `an amount should be a value object`() {
