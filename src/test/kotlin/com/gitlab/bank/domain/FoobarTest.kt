@@ -17,9 +17,9 @@ class MakeADeposit(val bankAccounts: BankAccounts) {
     operator fun invoke(client: BankClient, deposit: Deposit) {
         val account = bankAccounts.of(client)
 
-        account.make(deposit)
+        val accountAfterDeposit = account.make(deposit)
 
-        bankAccounts.commit(account)
+        bankAccounts.commit(accountAfterDeposit)
     }
 }
 
@@ -28,6 +28,8 @@ class InMemoryBankAccounts: BankAccounts {
 
     override fun of(client: BankClient) = accounts.first { it.owner == client }
     override fun commit(account: Account) {
+        accounts.removeIf { it == account }
+        accounts.add(account)
     }
 
     fun create(client: BankClient) {
