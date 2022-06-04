@@ -4,18 +4,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 
-class BankClient(named: String) {
-    val name = named
-
-    override fun equals(other: Any?): Boolean {
-        return other is BankClient && this.name == other.name
-    }
-
-    override fun hashCode(): Int {
-        return name.hashCode()
-    }
-}
-
 class BankClientTest {
 
     @Test
