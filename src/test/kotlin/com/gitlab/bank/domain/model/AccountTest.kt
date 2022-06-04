@@ -1,23 +1,11 @@
-package com.gitlab.bank
+package com.gitlab.bank.domain.model
 
+import com.gitlab.bank.domain.model.Account
+import com.gitlab.bank.domain.model.Amount
+import com.gitlab.bank.domain.model.Deposit
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-
-class Account {
-
-    private val deposits = mutableListOf<Deposit>()
-
-    val amount: Amount
-        get() = deposits.sum()
-
-    fun make(deposit: Deposit) {
-        deposits.add(deposit)
-    }
-
-
-    private fun List<Deposit>.sum() = fold(Amount(0.0)) { acc, deposit -> acc + deposit.amount}
-}
 
 class AccountTest {
 
