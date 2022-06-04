@@ -24,14 +24,14 @@ class MakeADeposit(val bankAccounts: BankAccounts) {
 }
 
 class InMemoryBankAccounts: BankAccounts {
-    val accounts = mutableMapOf<BankClient, Account>()
+    val accounts = mutableListOf<Account>()
 
-    override fun of(client: BankClient) = accounts[client]!!
+    override fun of(client: BankClient) = accounts.first { it.owner == client }
     override fun commit(account: Account) {
     }
 
     fun create(client: BankClient) {
-        accounts[client] = Account()
+        accounts.add(Account(ownedBy = client))
     }
 
 }
@@ -39,7 +39,7 @@ class InMemoryBankAccounts: BankAccounts {
 class FoobarTest {
     @Test
     fun `a client should make a deposit on their account`() {
-        /*val bankAccounts = InMemoryBankAccounts()
+        val bankAccounts = InMemoryBankAccounts()
         val client = BankClient(named="Grace Slick")
         bankAccounts.create(client)
 
@@ -47,8 +47,6 @@ class FoobarTest {
 
         makeADeposit(client, Deposit(of = Amount(120.0)))
 
-        assertThat(bankAccounts.of(client).amount).isEqualTo(Amount(120.0))*/
-
-        TODO("need to link account to client")
+        assertThat(bankAccounts.of(client).amount).isEqualTo(Amount(120.0))
     }
 }

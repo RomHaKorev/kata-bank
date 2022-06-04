@@ -1,14 +1,23 @@
 package com.gitlab.bank.domain.model
 
-class Account {
+class Account private constructor(val owner: BankClient,
+                                  private val deposits: List<Deposit>) {
 
-    private val deposits = mutableListOf<Deposit>()
+
+    constructor(ownedBy: BankClient): this(ownedBy, emptyList())
 
     val amount: Amount
         get() = deposits.sum()
 
-    fun make(deposit: Deposit) {
-        deposits.add(deposit)
+    fun make(deposit: Deposit): Account {
+        return Account(owner, deposits + listOf(deposit))
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is Account && this.owner == other.owner
+    }
+    override fun hashCode(): Int {
+        return owner.hashCode()
     }
 
 
