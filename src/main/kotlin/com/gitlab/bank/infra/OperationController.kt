@@ -6,8 +6,8 @@ import com.gitlab.bank.infra.resources.toDomain
 import io.javalin.http.Context
 import java.util.*
 
-class DepositController(val makeDeposit: MakeADeposit,
-                        val clients: Clients
+class OperationController(val makeDeposit: MakeADeposit,
+                          val clients: Clients
 ) {
 
     fun makeDeposit(ctx: Context) {
