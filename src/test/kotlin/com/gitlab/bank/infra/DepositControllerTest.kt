@@ -1,9 +1,10 @@
 package com.gitlab.bank.infra
 
-import com.gitlab.bank.domain.InMemoryBankAccounts
-import com.gitlab.bank.domain.model.Amount
-import com.gitlab.bank.domain.model.GRACE
+import com.gitlab.bank.domain.account.stubs.InMemoryAccounts
+import com.gitlab.bank.domain.account.model.Amount
+import com.gitlab.bank.domain.account.model.GRACE
 import com.gitlab.bank.infra.resources.DepositDTO
+import com.gitlab.bank.infra.stubs.InMemoryClients
 import io.javalin.plugin.json.JavalinJackson
 import io.javalin.testtools.JavalinTest
 import org.assertj.core.api.Assertions.assertThat
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test
 
 class DepositControllerTest {
 
-    private val accounts = InMemoryBankAccounts()
+    private val accounts = InMemoryAccounts()
     private val app = Application(accounts, InMemoryClients()).app
 
     @Test

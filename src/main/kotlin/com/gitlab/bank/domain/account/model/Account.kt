@@ -1,10 +1,12 @@
-package com.gitlab.bank.domain.model
+package com.gitlab.bank.domain.account.model
 
-class Account private constructor(val owner: BankClient,
+import com.gitlab.bank.domain.client.model.Client
+
+class Account private constructor(val owner: Client,
                                   private val deposits: List<Deposit>) {
 
 
-    constructor(ownedBy: BankClient): this(ownedBy, emptyList())
+    constructor(ownedBy: Client): this(ownedBy, emptyList())
 
     val amount: Amount
         get() = deposits.sum()

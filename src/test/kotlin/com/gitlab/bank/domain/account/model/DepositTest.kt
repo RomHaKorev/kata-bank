@@ -1,4 +1,4 @@
-package com.gitlab.bank.domain.model
+package com.gitlab.bank.domain.account.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

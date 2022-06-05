@@ -1,4 +1,4 @@
-package com.gitlab.bank.domain.model
+package com.gitlab.bank.domain.account.model
 
 data class Amount(val value: Double) {
     init {

@@ -1,6 +1,7 @@
 package com.gitlab.bank.domain
 
-import com.gitlab.bank.domain.model.*
+import com.gitlab.bank.domain.account.model.*
+import com.gitlab.bank.domain.account.stubs.InMemoryAccounts
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.Test
 class BankTest {
     @Test
     fun `a client should make a deposit on their account`() {
-        val bankAccounts = InMemoryBankAccounts()
+        val bankAccounts = InMemoryAccounts()
 
         bankAccounts.create(GRACE)
 
