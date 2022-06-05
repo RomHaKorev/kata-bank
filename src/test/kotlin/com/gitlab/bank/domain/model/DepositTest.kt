@@ -11,4 +11,13 @@ class DepositTest {
                 deposit.amount
         ).isEqualTo(Amount(12.0))
     }
+
+    @Test
+    fun `Deposit should be a value object`() {
+        assertThat(Deposit(of=Amount(12.0))).isEqualTo(Deposit(of=Amount(12.0)))
+        assertThat(Deposit(of=Amount(63.0))).isNotEqualTo(Deposit(of=Amount(12.0)))
+
+        assertThat(Deposit(of=Amount(12.0))).isEqualTo(Deposit(of=Amount(12.0)))
+        assertThat(Deposit(of=Amount(63.0)).hashCode()).isNotEqualTo(Deposit(of=Amount(12.0)).hashCode())
+    }
 }
