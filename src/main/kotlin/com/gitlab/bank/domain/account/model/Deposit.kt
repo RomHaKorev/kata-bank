@@ -1,7 +1,10 @@
 package com.gitlab.bank.domain.account.model
 
-class Deposit(of: Amount) {
+class Deposit(of: Amount): Operation {
     val amount = of
+    override fun plus(amount: Amount): Amount {
+        return amount + this.amount
+    }
 
     override fun equals(other: Any?): Boolean {
         return other is Deposit && this.amount == other.amount
