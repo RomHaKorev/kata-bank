@@ -22,6 +22,14 @@ class AccountTest {
     }
 
     @Test
+    fun `a withdrawal should decrease the amount of an account`() {
+        val account = newAccount(initialSold=200.0)
+        val accountAfterDeposit = account.make(Withdrawal(of= Amount(50.0)))
+
+        assertThat(accountAfterDeposit.amount).isEqualTo(Amount(150.0))
+    }
+
+    @Test
     fun `an account should be owned by a single client`() {
         assertThat(Account(ownedBy= GRACE))
             .isEqualTo(Account(ownedBy= GRACE))
@@ -37,7 +45,10 @@ class AccountTest {
     }
 
 
-    private fun newAccount(): Account {
-        return Account(ownedBy= GRACE)
+    private fun newAccount(initialSold: Double=0.0): Account {
+        val account = Account(ownedBy= GRACE)
+        if (initialSold != 0.0)
+            return account.make(Deposit(of=Amount(initialSold)))
+        return account
     }
 }
