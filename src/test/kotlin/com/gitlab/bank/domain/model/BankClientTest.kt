@@ -4,6 +4,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 
+val GRACE = BankClient(named="Grace Slick")
+val ALISON = BankClient(named="Alison Mosshart")
+
 class BankClientTest {
 
     @Test
@@ -15,10 +18,10 @@ class BankClientTest {
 
     @Test
     fun `a bank client should be identified by their name`() {
-        assertThat(BankClient(named="Grace Slick")).isEqualTo(BankClient(named="Grace Slick"))
-        assertThat(BankClient(named="Grace Slick")).isNotEqualTo(BankClient(named="Alison Mosshart"))
+        assertThat(GRACE).isEqualTo(GRACE)
+        assertThat(GRACE).isNotEqualTo(ALISON)
 
-        assertThat(BankClient(named="Grace Slick").hashCode()).isEqualTo(BankClient(named="Grace Slick").hashCode())
-        assertThat(BankClient(named="Grace Slick").hashCode()).isNotEqualTo(BankClient(named="Alison Mosshart").hashCode())
+        assertThat(GRACE.hashCode()).isEqualTo(GRACE.hashCode())
+        assertThat(GRACE.hashCode()).isNotEqualTo(ALISON.hashCode())
     }
 }

@@ -23,21 +23,21 @@ class AccountTest {
 
     @Test
     fun `an account should be owned by a single client`() {
-        assertThat(Account(ownedBy= BankClient(named="Grace Slick")))
-            .isEqualTo(Account(ownedBy= BankClient(named="Grace Slick")))
+        assertThat(Account(ownedBy= GRACE))
+            .isEqualTo(Account(ownedBy= GRACE))
 
-        assertThat(Account(ownedBy= BankClient(named="Grace Slick")))
-            .isNotEqualTo(Account(ownedBy= BankClient(named="Alison Mosshart")))
+        assertThat(Account(ownedBy= GRACE))
+            .isNotEqualTo(Account(ownedBy= ALISON))
 
-        assertThat(Account(ownedBy= BankClient(named="Grace Slick")).hashCode())
-            .isEqualTo(Account(ownedBy= BankClient(named="Grace Slick")).hashCode())
+        assertThat(Account(ownedBy= GRACE).hashCode())
+            .isEqualTo(Account(ownedBy= GRACE).hashCode())
 
-        assertThat(Account(ownedBy= BankClient(named="Grace Slick")).hashCode())
-            .isNotEqualTo(Account(ownedBy= BankClient(named="Alison Mosshart")).hashCode())
+        assertThat(Account(ownedBy= GRACE).hashCode())
+            .isNotEqualTo(Account(ownedBy= ALISON).hashCode())
     }
 
 
     private fun newAccount(): Account {
-        return Account(ownedBy= BankClient(named="Grace Slick"))
+        return Account(ownedBy= GRACE)
     }
 }
