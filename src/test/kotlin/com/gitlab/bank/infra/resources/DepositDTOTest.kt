@@ -5,13 +5,6 @@ import com.gitlab.bank.domain.model.Deposit
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-data class DepositDTO(
-    val amount: Double
-)
-
-fun DepositDTO.toDomain(): Deposit {
-    return Deposit(of=Amount(this.amount))
-}
 
 class DepositDTOTest {
     @Test
