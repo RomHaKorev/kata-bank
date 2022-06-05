@@ -7,4 +7,8 @@ data class Amount(val value: Double) {
     operator fun plus(other: Amount): Amount {
         return Amount(value + other.value)
     }
+
+    operator fun minus(other: Amount): Amount {
+        return Amount(value - other.value)
+    }
 }

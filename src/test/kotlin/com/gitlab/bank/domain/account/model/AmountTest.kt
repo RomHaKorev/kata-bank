@@ -14,8 +14,12 @@ class AmountTest {
 
     @Test
     fun `an amount should be summed to another`() {
-
         assertThat(Amount(12.0) + Amount(16.0)).isEqualTo(Amount(28.0))
+    }
+
+    @Test
+    fun `an amount should be substracted to another`() {
+        assertThat(Amount(20.0) - Amount(16.0)).isEqualTo(Amount(4.0))
     }
 
 
