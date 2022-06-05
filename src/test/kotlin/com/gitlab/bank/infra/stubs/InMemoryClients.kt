@@ -10,7 +10,7 @@ class InMemoryClients: Clients {
 
     val clients = listOf(GRACE, ALISON)
 
-    override fun findBy(id: UUID): Client {
-        return clients.first { it.id == id }
+    override fun findBy(id: UUID): Optional<Client> {
+        return Optional.of(clients.firstOrNull { it.id == id } ?: return Optional.empty())
     }
 }

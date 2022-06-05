@@ -12,9 +12,18 @@ class DepositController(val makeDeposit: MakeADeposit,
 
     fun makeDeposit(ctx: Context) {
         val clientId = UUID.fromString(ctx.pathParam("client-id"))
-        val client = clients.findBy(clientId)
-        val deposit = ctx.bodyAsClass<com.gitlab.bank.infra.resources.DepositDTO>().toDomain()
+        clients.findBy(clientId).ifPresentOrElse(
+        { client ->
+            val deposit = ctx.bodyAsClass<com.gitlab.bank.infra.resources.DepositDTO>().toDomain()
+            makeDeposit(client, deposit)
+            ctx.status(200)
+        })
+        {
+            ctx.status(401)
+        }
 
-        makeDeposit(client, deposit)
+
+
+
     }
 }

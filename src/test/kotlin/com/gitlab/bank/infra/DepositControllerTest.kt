@@ -3,6 +3,7 @@ package com.gitlab.bank.infra
 import com.gitlab.bank.domain.account.stubs.InMemoryAccounts
 import com.gitlab.bank.domain.account.model.Amount
 import com.gitlab.bank.domain.account.model.GRACE
+import com.gitlab.bank.domain.account.model.KAREN
 import com.gitlab.bank.infra.resources.DepositDTO
 import com.gitlab.bank.infra.stubs.InMemoryClients
 import io.javalin.plugin.json.JavalinJackson
@@ -26,5 +27,13 @@ class DepositControllerTest {
         assertThat(response.code).isEqualTo(200)
 
         assertThat(accounts.of(GRACE).amount).isEqualTo(Amount(120.0))
+    }
+
+    @Test
+    fun `an unknown user cannot make a deposit`() = JavalinTest.test(app) { server, client ->
+        val deposit = DepositDTO(120.0)
+
+        val response = client.post("/deposit/${KAREN.id}", JavalinJackson().toJsonString(deposit))
+        assertThat(response.code).isEqualTo(401)
     }
 }
