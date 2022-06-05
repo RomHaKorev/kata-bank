@@ -14,7 +14,6 @@ fun DepositDTO.toDomain(): Deposit {
 }
 
 class DepositDTOTest {
-
     @Test
     fun `should map DTO to domain`() {
         assertThat(
