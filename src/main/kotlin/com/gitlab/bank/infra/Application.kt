@@ -6,7 +6,7 @@ import com.gitlab.bank.domain.client.spi.Clients
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder
 
-class Application(val accounts: Accounts, val bankClients: Clients) {
+class Application(private val accounts: Accounts, private val bankClients: Clients) {
     val app = Javalin.create().routes {
         val bank = Bank(accounts)
         val controller = OperationController(bank, bank, bankClients)

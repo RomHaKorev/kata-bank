@@ -11,7 +11,7 @@ import java.util.*
 
 class OperationController(val makeDeposit: MakeADeposit,
                           val makeAWithdrawal: MakeAWithdrawal,
-                          val clients: Clients
+                          private val clients: Clients
 ) {
 
     fun depositHandler(ctx: Context) {
