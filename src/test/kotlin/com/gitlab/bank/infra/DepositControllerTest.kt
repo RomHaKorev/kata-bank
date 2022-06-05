@@ -47,8 +47,6 @@ class DepositControllerTest {
         assertThat(response.code).isEqualTo(200)
 
         assertThat(accounts.of(GRACE).amount).isEqualTo(Amount(880.0))*/
-
-        TODO("need withdrawal DTO")
         TODO("need withdrawal endpoint")
     }
 }
