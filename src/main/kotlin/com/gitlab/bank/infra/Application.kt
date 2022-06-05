@@ -10,7 +10,7 @@ class Application(val accounts: Accounts, val bankClients: Clients) {
     val app = Javalin.create().routes {
         val bank = Bank(accounts)
         val controller = OperationController(bank, bank, bankClients)
-        ApiBuilder.post("/deposit/{client-id}", controller::makeDeposit)
-        ApiBuilder.post("/withdrawal/{client-id}", controller::makeWithdrawal)
+        ApiBuilder.post("/deposit/{client-id}", controller::depositHandler)
+        ApiBuilder.post("/withdrawal/{client-id}", controller::withdrawalHandler)
     }
 }

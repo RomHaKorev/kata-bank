@@ -14,7 +14,7 @@ class OperationController(val makeDeposit: MakeADeposit,
                           val clients: Clients
 ) {
 
-    fun makeDeposit(ctx: Context) {
+    fun depositHandler(ctx: Context) {
         val clientId = UUID.fromString(ctx.pathParam("client-id"))
         clients.findBy(clientId).ifPresentOrElse(
         { client ->
@@ -27,7 +27,7 @@ class OperationController(val makeDeposit: MakeADeposit,
         }
     }
 
-    fun makeWithdrawal(ctx: Context) {
+    fun withdrawalHandler(ctx: Context) {
         val clientId = UUID.fromString(ctx.pathParam("client-id"))
         clients.findBy(clientId).ifPresentOrElse(
                 { client ->
