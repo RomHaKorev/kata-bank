@@ -18,7 +18,7 @@ class DepositControllerTest {
     private val app = Application(accounts, InMemoryClients()).app
 
     @Test
-    fun `Should make a deposit`() = JavalinTest.test(app) { server, client ->
+    fun `Should make a deposit`() = JavalinTest.test(app) { _, client ->
 
         val deposit = DepositDTO(120.0)
 
@@ -30,7 +30,7 @@ class DepositControllerTest {
     }
 
     @Test
-    fun `an unknown user cannot make a deposit`() = JavalinTest.test(app) { server, client ->
+    fun `an unknown user cannot make a deposit`() = JavalinTest.test(app) { _, client ->
         val deposit = DepositDTO(120.0)
 
         val response = client.post("/deposit/${KAREN.id}", JavalinJackson().toJsonString(deposit))

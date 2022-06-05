@@ -21,9 +21,5 @@ class DepositController(val makeDeposit: MakeADeposit,
         {
             ctx.status(401)
         }
-
-
-
-
     }
 }
