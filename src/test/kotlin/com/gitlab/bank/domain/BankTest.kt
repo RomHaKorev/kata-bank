@@ -1,9 +1,6 @@
 package com.gitlab.bank.domain
 
-import com.gitlab.bank.domain.model.Account
-import com.gitlab.bank.domain.model.Amount
-import com.gitlab.bank.domain.model.BankClient
-import com.gitlab.bank.domain.model.Deposit
+import com.gitlab.bank.domain.model.*
 import com.gitlab.bank.domain.spi.BankAccounts
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -28,13 +25,13 @@ class BankTest {
     @Test
     fun `a client should make a deposit on their account`() {
         val bankAccounts = InMemoryBankAccounts()
-        val client = BankClient(named="Grace Slick")
-        bankAccounts.create(client)
+
+        bankAccounts.create(GRACE)
 
         val bank = Bank(bankAccounts)
 
-        bank(client, Deposit(of = Amount(120.0)))
+        bank(GRACE, Deposit(of = Amount(120.0)))
 
-        assertThat(bankAccounts.of(client).amount).isEqualTo(Amount(120.0))
+        assertThat(bankAccounts.of(GRACE).amount).isEqualTo(Amount(120.0))
     }
 }
