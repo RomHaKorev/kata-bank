@@ -2,6 +2,7 @@ package com.gitlab.bank.infra
 
 import com.gitlab.bank.domain.account.api.MakeADeposit
 import com.gitlab.bank.domain.account.api.MakeAWithdrawal
+import com.gitlab.bank.domain.client.model.Client
 import com.gitlab.bank.domain.client.spi.Clients
 import com.gitlab.bank.infra.resources.DepositDTO
 import com.gitlab.bank.infra.resources.WithdrawalDTO
@@ -15,24 +16,24 @@ class OperationController(val makeDeposit: MakeADeposit,
 ) {
 
     fun depositHandler(ctx: Context) {
-        val clientId = UUID.fromString(ctx.pathParam("client-id"))
-        clients.findBy(clientId).ifPresentOrElse(
-        { client ->
+        clientOperation(ctx ) { client ->
             val deposit = ctx.bodyAsClass<DepositDTO>().toDomain()
             makeDeposit(client, deposit)
-            ctx.status(200)
-        })
-        {
-            ctx.status(401)
         }
     }
 
     fun withdrawalHandler(ctx: Context) {
+        clientOperation(ctx ) { client ->
+                    val withdrawal = ctx.bodyAsClass<WithdrawalDTO>().toDomain()
+                    makeAWithdrawal(client, withdrawal)
+        }
+    }
+
+    private fun clientOperation(ctx: Context, handler: (client: Client) -> Unit) {
         val clientId = UUID.fromString(ctx.pathParam("client-id"))
         clients.findBy(clientId).ifPresentOrElse(
                 { client ->
-                    val withdrawal = ctx.bodyAsClass<WithdrawalDTO>().toDomain()
-                    makeAWithdrawal(client, withdrawal)
+                    handler(client)
                     ctx.status(200)
                 })
         {
