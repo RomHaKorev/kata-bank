@@ -12,4 +12,13 @@ class WithdrawalTest {
                 withdrawal.amount
         ).isEqualTo(Amount(12.0))
     }
+
+    @Test
+    fun `Withdrawal should be a value object`() {
+        Assertions.assertThat(Withdrawal(of = Amount(12.0))).isEqualTo(Withdrawal(of=Amount(12.0)))
+        Assertions.assertThat(Withdrawal(of = Amount(63.0))).isNotEqualTo(Withdrawal(of=Amount(12.0)))
+
+        Assertions.assertThat(Withdrawal(of = Amount(12.0))).isEqualTo(Withdrawal(of=Amount(12.0)))
+        Assertions.assertThat(Withdrawal(of = Amount(63.0)).hashCode()).isNotEqualTo(Withdrawal(of=Amount(12.0)).hashCode())
+    }
 }

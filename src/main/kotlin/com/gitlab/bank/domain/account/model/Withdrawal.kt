@@ -5,4 +5,12 @@ class Withdrawal(of: Amount): Operation {
     override fun plus(amount: Amount): Amount {
         return amount - this.amount
     }
+
+    override fun equals(other: Any?): Boolean {
+        return other is Withdrawal && this.amount == other.amount
+    }
+
+    override fun hashCode(): Int {
+        return amount.hashCode()
+    }
 }

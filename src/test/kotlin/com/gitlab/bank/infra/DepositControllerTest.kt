@@ -36,4 +36,19 @@ class DepositControllerTest {
         val response = client.post("/deposit/${KAREN.id}", JavalinJackson().toJsonString(deposit))
         assertThat(response.code).isEqualTo(401)
     }
+
+    @Test
+    fun `Should make a withdrawal`() = JavalinTest.test(app) { _, client ->
+/*
+        val deposit = WithdrawalDTO(120.0)
+
+        accounts.create(GRACE, initialSold = 1000.0)
+        val response = client.post("/withdrawal/${GRACE.id}", JavalinJackson().toJsonString(deposit))
+        assertThat(response.code).isEqualTo(200)
+
+        assertThat(accounts.of(GRACE).amount).isEqualTo(Amount(880.0))*/
+
+        TODO("need withdrawal DTO")
+        TODO("need withdrawal endpoint")
+    }
 }
