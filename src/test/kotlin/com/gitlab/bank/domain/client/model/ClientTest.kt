@@ -1,4 +1,4 @@
-package com.gitlab.bank.domain.operation.model
+package com.gitlab.bank.domain.client.model
 
 import com.gitlab.bank.domain.client.model.Client
 import com.gitlab.bank.infra.stubs.ALISON
