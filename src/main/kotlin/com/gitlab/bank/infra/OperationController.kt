@@ -1,7 +1,7 @@
 package com.gitlab.bank.infra
 
-import com.gitlab.bank.domain.account.api.MakeADeposit
-import com.gitlab.bank.domain.account.api.MakeAWithdrawal
+import com.gitlab.bank.domain.operation.api.MakeADeposit
+import com.gitlab.bank.domain.operation.api.MakeAWithdrawal
 import com.gitlab.bank.domain.client.model.Client
 import com.gitlab.bank.domain.client.spi.Clients
 import com.gitlab.bank.infra.resources.DepositDTO

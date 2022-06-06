@@ -1,11 +1,11 @@
 package com.gitlab.bank.domain
 
-import com.gitlab.bank.domain.account.api.MakeADeposit
-import com.gitlab.bank.domain.account.api.MakeAWithdrawal
+import com.gitlab.bank.domain.operation.api.MakeADeposit
+import com.gitlab.bank.domain.operation.api.MakeAWithdrawal
 import com.gitlab.bank.domain.client.model.Client
-import com.gitlab.bank.domain.account.model.Deposit
-import com.gitlab.bank.domain.account.model.Withdrawal
-import com.gitlab.bank.domain.account.spi.Accounts
+import com.gitlab.bank.domain.operation.model.Deposit
+import com.gitlab.bank.domain.operation.model.Withdrawal
+import com.gitlab.bank.domain.operation.spi.Accounts
 
 class Bank(private val accounts: Accounts): MakeADeposit, MakeAWithdrawal {
     override operator fun invoke(client: Client, deposit: Deposit) {

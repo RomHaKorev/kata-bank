@@ -1,10 +1,10 @@
-package com.gitlab.bank.domain.account.stubs
+package com.gitlab.bank.domain.operation.stubs
 
-import com.gitlab.bank.domain.account.model.Account
-import com.gitlab.bank.domain.account.model.Amount
-import com.gitlab.bank.domain.account.model.Deposit
+import com.gitlab.bank.domain.operation.model.Account
+import com.gitlab.bank.domain.operation.model.Amount
+import com.gitlab.bank.domain.operation.model.Deposit
 import com.gitlab.bank.domain.client.model.Client
-import com.gitlab.bank.domain.account.spi.Accounts
+import com.gitlab.bank.domain.operation.spi.Accounts
 
 class InMemoryAccounts: Accounts {
     val accounts = mutableListOf<Account>()

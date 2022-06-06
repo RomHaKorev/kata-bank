@@ -1,7 +1,7 @@
 package com.gitlab.bank.infra
 
 import com.gitlab.bank.domain.Bank
-import com.gitlab.bank.domain.account.spi.Accounts
+import com.gitlab.bank.domain.operation.spi.Accounts
 import com.gitlab.bank.domain.client.spi.Clients
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder

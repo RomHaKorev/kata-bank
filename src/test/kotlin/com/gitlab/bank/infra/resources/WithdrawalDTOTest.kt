@@ -1,7 +1,7 @@
 package com.gitlab.bank.infra.resources
 
-import com.gitlab.bank.domain.account.model.Amount
-import com.gitlab.bank.domain.account.model.Withdrawal
+import com.gitlab.bank.domain.operation.model.Amount
+import com.gitlab.bank.domain.operation.model.Withdrawal
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 

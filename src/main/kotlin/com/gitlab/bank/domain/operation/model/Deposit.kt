@@ -1,4 +1,4 @@
-package com.gitlab.bank.domain.account.model
+package com.gitlab.bank.domain.operation.model
 
 class Deposit(of: Amount): Operation {
     val amount = of

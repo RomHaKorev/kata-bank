@@ -1,6 +1,6 @@
-package com.gitlab.bank.domain.account.api
+package com.gitlab.bank.domain.operation.api
 
-import com.gitlab.bank.domain.account.model.Withdrawal
+import com.gitlab.bank.domain.operation.model.Withdrawal
 import com.gitlab.bank.domain.client.model.Client
 
 interface MakeAWithdrawal {

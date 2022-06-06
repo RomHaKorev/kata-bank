@@ -1,9 +1,9 @@
 package com.gitlab.bank.infra
 
-import com.gitlab.bank.domain.account.stubs.InMemoryAccounts
-import com.gitlab.bank.domain.account.model.Amount
-import com.gitlab.bank.domain.account.model.GRACE
-import com.gitlab.bank.domain.account.model.KAREN
+import com.gitlab.bank.domain.operation.stubs.InMemoryAccounts
+import com.gitlab.bank.domain.operation.model.Amount
+import com.gitlab.bank.domain.operation.model.GRACE
+import com.gitlab.bank.domain.operation.model.KAREN
 import com.gitlab.bank.infra.resources.DepositDTO
 import com.gitlab.bank.infra.resources.WithdrawalDTO
 import com.gitlab.bank.infra.stubs.InMemoryClients
