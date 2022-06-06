@@ -36,7 +36,7 @@ class BankTest {
 
 
     @Test
-    fun `a new client should an empty history of their operation`() {
+    fun `a new client should have an empty history of their operations`() {
         val bankAccounts = InMemoryAccounts()
         bankAccounts.create(GRACE)
 
@@ -44,6 +44,26 @@ class BankTest {
 
         val history = bank.`get history of`(GRACE)
 
-        assertThat(history).isEmpty()
+        assertThat(history.isEmpty).isTrue
+    }
+
+    @Test
+    fun `a client should have an history of all their operations`() {
+        val bankAccounts = InMemoryAccounts()
+        bankAccounts.create(GRACE)
+
+        val bank = Bank(bankAccounts)
+
+        bank(GRACE, Deposit(of = Amount(120.0)))
+        bank(GRACE, Deposit(of = Amount(80.0)))
+        bank(GRACE, Withdrawal(of = Amount(50.0)))
+
+        val history = bank.`get history of`(GRACE)
+
+        assertThat(history).isEqualTo(
+                History().`client made`(Deposit(of = Amount(120.0)))
+                         .`client made`(Deposit(of = Amount(80.0)))
+                         .`client made`(Withdrawal(of = Amount(50.0)))
+        )
     }
 }
