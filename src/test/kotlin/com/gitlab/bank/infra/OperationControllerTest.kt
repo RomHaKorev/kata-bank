@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test
 class OperationControllerTest {
 
     private val accounts = InMemoryAccounts()
-    private val app = Application(accounts, InMemoryClients()).runner
+    private val app = Application(accounts, InMemoryClients(), {Clock()}).runner
 
     @Test
     fun `Should make a deposit`() = JavalinTest.test(app) { _, client ->

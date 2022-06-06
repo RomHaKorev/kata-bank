@@ -7,11 +7,12 @@ import com.gitlab.bank.infra.stubs.InMemoryAccounts
 import com.gitlab.bank.infra.stubs.InMemoryClients
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder
+import java.time.LocalDateTime
 
-class Application(private val accounts: Accounts, private val bankClients: Clients) {
+class Application(private val accounts: Accounts, private val bankClients: Clients, now: () -> LocalDateTime) {
     val runner = Javalin.create().routes {
         val bank = Bank(accounts)
-        val operationController = OperationController(bank, bankClients)
+        val operationController = OperationController(bank, bankClients, now)
         val listingController = ListingController(bank, bankClients)
         ApiBuilder.post("/deposit/{client-id}", operationController::depositHandler)
         ApiBuilder.post("/withdrawal/{client-id}", operationController::withdrawalHandler)
@@ -27,7 +28,7 @@ fun main() {
         accounts.create(it)
         println("${it.name}: ${it.id}")
     }
-    val application = Application(accounts, clients)
+    val application = Application(accounts, clients) { LocalDateTime.now() }
 
     application.runner.start(8080)
 }

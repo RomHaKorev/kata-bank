@@ -5,9 +5,16 @@ import com.gitlab.bank.infra.stubs.GRACE
 import com.gitlab.bank.infra.stubs.InMemoryAccounts
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 
+val aDate: LocalDateTime = LocalDateTime.of(1975, 2, 17, 12, 7, 0)
+val anotherDate = LocalDateTime.of(1979, 7, 27, 12, 7, 0)
+val thenAnotherDate = LocalDateTime.of(1980, 7, 25, 12, 7, 0)
 
 class BankTest {
+
+    val aDate: LocalDateTime = LocalDateTime.of(1975, 2, 17, 12, 7, 0)
+
     @Test
     fun `a client should make a deposit on their account`() {
         val bankAccounts = InMemoryAccounts()
@@ -16,7 +23,7 @@ class BankTest {
 
         val bank = Bank(bankAccounts)
 
-        bank(GRACE, Operation.deposit(of = Amount(120.0)))
+        bank(GRACE, Operation.deposit(of = Amount(120.0), at=aDate))
 
         assertThat(bankAccounts.of(GRACE).amount).isEqualTo(Amount(120.0))
     }
@@ -29,7 +36,7 @@ class BankTest {
 
         val bank = Bank(bankAccounts)
 
-        bank(GRACE, Operation.withdrawal(of = Amount(200.0)))
+        bank(GRACE, Operation.withdrawal(of = Amount(200.0), at = aDate))
 
         assertThat(bankAccounts.of(GRACE).amount).isEqualTo(Amount(800.0))
     }
@@ -54,16 +61,16 @@ class BankTest {
 
         val bank = Bank(bankAccounts)
 
-        bank(GRACE, Operation.deposit(of = Amount(120.0)))
-        bank(GRACE, Operation.deposit(of = Amount(80.0)))
-        bank(GRACE, Operation.withdrawal(of = Amount(50.0)))
+        bank(GRACE, Operation.deposit(of = Amount(120.0), at=aDate))
+        bank(GRACE, Operation.deposit(of = Amount(80.0), at=anotherDate))
+        bank(GRACE, Operation.withdrawal(of = Amount(50.0), at=thenAnotherDate))
 
         val history = bank(GRACE)
 
         assertThat(history).isEqualTo(
-                History().`client made`(Operation.deposit(of = Amount(120.0)))
-                         .`client made`(Operation.deposit(of = Amount(80.0)))
-                         .`client made`(Operation.withdrawal(of = Amount(50.0)))
+                History().`client made`(Operation.deposit(of = Amount(120.0), at=aDate))
+                         .`client made`(Operation.deposit(of = Amount(80.0), at=anotherDate))
+                         .`client made`(Operation.withdrawal(of = Amount(50.0), at=thenAnotherDate))
         )
     }
 }

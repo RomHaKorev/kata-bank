@@ -1,12 +1,23 @@
 package com.gitlab.bank.domain.operation.model
 
+import com.gitlab.bank.domain.aDate
 import com.gitlab.bank.infra.stubs.ALISON
 import com.gitlab.bank.infra.stubs.GRACE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 
+fun Operation.Companion.deposit(of: Amount): Operation {
+    return deposit(of= of, at=aDate)
+}
+
+fun Operation.Companion.withdrawal(of: Amount): Operation {
+    return withdrawal(of= of, at=aDate)
+}
 
 class AccountTest {
+
+
 
     @Test
     fun `a new account should be empty`() {

@@ -8,19 +8,21 @@ import com.gitlab.bank.infra.resources.DepositDTO
 import com.gitlab.bank.infra.resources.WithdrawalDTO
 import com.gitlab.bank.infra.resources.toDomain
 import io.javalin.http.Context
+import java.time.LocalDateTime
 import java.util.*
 
 class OperationController(val `make an operation`: MakeAnOperation,
-                          private val clients: Clients
+                          private val clients: Clients,
+                          private val now: () -> LocalDateTime
 ) {
 
     fun depositHandler(ctx: Context) {
-        val operation = ctx.bodyAsClass<DepositDTO>().toDomain()
+        val operation = ctx.bodyAsClass<DepositDTO>().toDomain(now())
         clientOperation(ctx, operation)
     }
 
     fun withdrawalHandler(ctx: Context) {
-        val operation = ctx.bodyAsClass<WithdrawalDTO>().toDomain()
+        val operation = ctx.bodyAsClass<WithdrawalDTO>().toDomain(now())
         clientOperation(ctx, operation)
     }
 
