@@ -1,12 +1,11 @@
-package com.gitlab.bank.infra
+package com.gitlab.bank.infra.operation.rest
 
-import com.gitlab.bank.domain.operation.api.MakeAnOperation
-import com.gitlab.bank.domain.client.model.Client
 import com.gitlab.bank.domain.client.spi.Clients
+import com.gitlab.bank.domain.operation.api.MakeAnOperation
 import com.gitlab.bank.domain.operation.model.Operation
-import com.gitlab.bank.infra.resources.DepositDTO
-import com.gitlab.bank.infra.resources.WithdrawalDTO
-import com.gitlab.bank.infra.resources.toDomain
+import com.gitlab.bank.infra.operation.rest.resources.DepositDTO
+import com.gitlab.bank.infra.operation.rest.resources.WithdrawalDTO
+import com.gitlab.bank.infra.operation.rest.resources.toDomain
 import io.javalin.http.Context
 import java.time.LocalDateTime
 import java.util.*

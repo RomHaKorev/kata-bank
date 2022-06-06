@@ -1,4 +1,4 @@
-package com.gitlab.bank.infra.stubs
+package com.gitlab.bank.infra.client.persistence.stubs
 
 import com.gitlab.bank.domain.client.model.Client
 import com.gitlab.bank.domain.client.spi.Clients

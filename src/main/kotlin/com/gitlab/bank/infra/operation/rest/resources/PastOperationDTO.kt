@@ -1,4 +1,4 @@
-package com.gitlab.bank.infra.resources
+package com.gitlab.bank.infra.operation.rest.resources
 
 import com.gitlab.bank.domain.operation.model.*
 import java.time.LocalDateTime

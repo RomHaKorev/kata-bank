@@ -1,8 +1,7 @@
 package com.gitlab.bank.domain.client.model
 
-import com.gitlab.bank.domain.client.model.Client
-import com.gitlab.bank.infra.stubs.ALISON
-import com.gitlab.bank.infra.stubs.GRACE
+import com.gitlab.bank.infra.client.persistence.stubs.ALISON
+import com.gitlab.bank.infra.client.persistence.stubs.GRACE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.util.*

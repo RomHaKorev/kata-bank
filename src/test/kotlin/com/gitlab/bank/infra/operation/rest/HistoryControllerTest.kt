@@ -1,33 +1,22 @@
-package com.gitlab.bank.infra
+package com.gitlab.bank.infra.operation.rest
 
 import com.gitlab.bank.domain.operation.model.*
-import com.gitlab.bank.infra.stubs.InMemoryAccounts
-import com.gitlab.bank.infra.resources.toDTO
-import com.gitlab.bank.infra.stubs.GRACE
-import com.gitlab.bank.infra.stubs.InMemoryClients
-import com.gitlab.bank.infra.stubs.KAREN
+import com.gitlab.bank.infra.Application
+import com.gitlab.bank.infra.operation.persistence.stubs.InMemoryAccounts
+import com.gitlab.bank.infra.operation.rest.resources.toDTO
+import com.gitlab.bank.infra.client.persistence.stubs.GRACE
+import com.gitlab.bank.infra.client.persistence.stubs.InMemoryClients
+import com.gitlab.bank.infra.client.persistence.stubs.KAREN
 import io.javalin.plugin.json.JavalinJackson
 import io.javalin.testtools.JavalinTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
 
 
-object Clock {
-    private var dateIndex = 0
-    val dates = listOf(
-            LocalDateTime.of(1975, 2, 17, 12, 7, 0),
-            LocalDateTime.of(1979, 7, 27, 12, 7, 0),
-            LocalDateTime.of(1980, 7, 25, 12, 7, 0))
-    operator fun invoke(): LocalDateTime {
-        return dates[dateIndex++ % 3]
-    }
-}
-
-class ListingControllerTest {
+class HistoryControllerTest {
 
     private val accounts = InMemoryAccounts()
-    private val app = Application(accounts, InMemoryClients(), {Clock()}).runner
+    private val app = Application(accounts, InMemoryClients(), { ClockFake() }).runner
 
     @Test
     fun `Should get the history`() = JavalinTest.test(app) { _, client ->

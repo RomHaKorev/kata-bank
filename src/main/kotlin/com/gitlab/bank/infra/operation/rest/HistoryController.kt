@@ -1,13 +1,13 @@
-package com.gitlab.bank.infra
+package com.gitlab.bank.infra.operation.rest
 
 import com.gitlab.bank.domain.client.spi.Clients
 import com.gitlab.bank.domain.operation.api.GetHistoryOf
-import com.gitlab.bank.infra.resources.toDTO
+import com.gitlab.bank.infra.operation.rest.resources.toDTO
 import io.javalin.http.Context
 import io.javalin.plugin.json.JavalinJackson
 import java.util.*
 
-class ListingController(val getHistoryOf: GetHistoryOf,
+class HistoryController(val getHistoryOf: GetHistoryOf,
                         private val clients: Clients
 ) {
 

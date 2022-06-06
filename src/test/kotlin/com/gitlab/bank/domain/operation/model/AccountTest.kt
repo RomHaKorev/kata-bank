@@ -1,11 +1,10 @@
 package com.gitlab.bank.domain.operation.model
 
 import com.gitlab.bank.domain.aDate
-import com.gitlab.bank.infra.stubs.ALISON
-import com.gitlab.bank.infra.stubs.GRACE
+import com.gitlab.bank.infra.client.persistence.stubs.ALISON
+import com.gitlab.bank.infra.client.persistence.stubs.GRACE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
 
 fun Operation.Companion.deposit(of: Amount): Operation {
     return deposit(of= of, at=aDate)

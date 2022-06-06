@@ -1,6 +1,5 @@
-package com.gitlab.bank.infra.resources
+package com.gitlab.bank.infra.operation.rest.resources
 
-import com.gitlab.bank.domain.aDate
 import com.gitlab.bank.domain.operation.model.*
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
