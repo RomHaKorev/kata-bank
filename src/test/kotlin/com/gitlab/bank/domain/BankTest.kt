@@ -16,7 +16,7 @@ class BankTest {
 
         val bank = Bank(bankAccounts)
 
-        bank(GRACE, Deposit(of = Amount(120.0)))
+        bank(GRACE, Operation.deposit(of = Amount(120.0)))
 
         assertThat(bankAccounts.of(GRACE).amount).isEqualTo(Amount(120.0))
     }
@@ -29,7 +29,7 @@ class BankTest {
 
         val bank = Bank(bankAccounts)
 
-        bank(GRACE, Withdrawal(of = Amount(200.0)))
+        bank(GRACE, Operation.withdrawal(of = Amount(200.0)))
 
         assertThat(bankAccounts.of(GRACE).amount).isEqualTo(Amount(800.0))
     }
@@ -54,16 +54,16 @@ class BankTest {
 
         val bank = Bank(bankAccounts)
 
-        bank(GRACE, Deposit(of = Amount(120.0)))
-        bank(GRACE, Deposit(of = Amount(80.0)))
-        bank(GRACE, Withdrawal(of = Amount(50.0)))
+        bank(GRACE, Operation.deposit(of = Amount(120.0)))
+        bank(GRACE, Operation.deposit(of = Amount(80.0)))
+        bank(GRACE, Operation.withdrawal(of = Amount(50.0)))
 
         val history = bank(GRACE)
 
         assertThat(history).isEqualTo(
-                History().`client made`(Deposit(of = Amount(120.0)))
-                         .`client made`(Deposit(of = Amount(80.0)))
-                         .`client made`(Withdrawal(of = Amount(50.0)))
+                History().`client made`(Operation.deposit(of = Amount(120.0)))
+                         .`client made`(Operation.deposit(of = Amount(80.0)))
+                         .`client made`(Operation.withdrawal(of = Amount(50.0)))
         )
     }
 }

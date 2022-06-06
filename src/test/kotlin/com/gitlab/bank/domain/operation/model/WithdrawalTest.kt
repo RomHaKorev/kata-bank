@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 class WithdrawalTest {
     @Test
     fun `create a withdrawal of a given amount`() {
-        val withdrawal = Withdrawal(of = Amount(12.0))
+        val withdrawal = Operation.withdrawal(of = Amount(12.0))
         Assertions.assertThat(
                 withdrawal.amount
         ).isEqualTo(Amount(12.0))
@@ -15,10 +15,10 @@ class WithdrawalTest {
 
     @Test
     fun `Withdrawal should be a value object`() {
-        Assertions.assertThat(Withdrawal(of = Amount(12.0))).isEqualTo(Withdrawal(of=Amount(12.0)))
-        Assertions.assertThat(Withdrawal(of = Amount(63.0))).isNotEqualTo(Withdrawal(of=Amount(12.0)))
+        Assertions.assertThat(Operation.withdrawal(of = Amount(12.0))).isEqualTo(Operation.withdrawal(of=Amount(12.0)))
+        Assertions.assertThat(Operation.withdrawal(of = Amount(63.0))).isNotEqualTo(Operation.withdrawal(of=Amount(12.0)))
 
-        Assertions.assertThat(Withdrawal(of = Amount(12.0))).isEqualTo(Withdrawal(of=Amount(12.0)))
-        Assertions.assertThat(Withdrawal(of = Amount(63.0)).hashCode()).isNotEqualTo(Withdrawal(of=Amount(12.0)).hashCode())
+        Assertions.assertThat(Operation.withdrawal(of = Amount(12.0))).isEqualTo(Operation.withdrawal(of=Amount(12.0)))
+        Assertions.assertThat(Operation.withdrawal(of = Amount(63.0)).hashCode()).isNotEqualTo(Operation.withdrawal(of=Amount(12.0)).hashCode())
     }
 }

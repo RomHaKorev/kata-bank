@@ -11,11 +11,7 @@ class Account private constructor(val owner: Client,
     val amount: Amount
         get() = operations.sum()
 
-    fun make(deposit: Deposit): Account {
-        return Account(owner, operations + listOf(deposit))
-    }
-
-    fun make(deposit: Withdrawal): Account {
+    fun make(deposit: Operation): Account {
         return Account(owner, operations + listOf(deposit))
     }
 

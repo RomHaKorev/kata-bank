@@ -1,6 +1,9 @@
 package com.gitlab.bank.infra
 
-import com.gitlab.bank.domain.operation.model.*
+import com.gitlab.bank.domain.operation.model.Amount
+import com.gitlab.bank.domain.operation.model.GRACE
+import com.gitlab.bank.domain.operation.model.History
+import com.gitlab.bank.domain.operation.model.Operation
 import com.gitlab.bank.domain.operation.stubs.InMemoryAccounts
 import com.gitlab.bank.infra.resources.toDTO
 import com.gitlab.bank.infra.stubs.InMemoryClients
@@ -16,18 +19,19 @@ class ListingControllerTest {
 
     @Test
     fun `Should get the history`() = JavalinTest.test(app) { _, client ->
-        val account = accounts.create(GRACE).make(Deposit(of=Amount(100.0)))
-                                            .make(Withdrawal(of=Amount(50.0)))
-                                            .make(Deposit(of=Amount(100.0)))
+        val account = accounts.create(GRACE).make(Operation.deposit(of= Amount(100.0)))
+                                            .make(Operation.withdrawal(of=Amount(50.0)))
+                                            .make(Operation.deposit(of=Amount(100.0)))
         accounts.commit(account)
 
         val response = client.get("/history/${GRACE.id}")
         assertThat(response.code).isEqualTo(200)
 
         assertThat(response.body?.string()).isEqualTo(
-                JavalinJackson().toJsonString(History().`client made`(Deposit(of=Amount(100.0)))
-                         .`client made`(Withdrawal(of=Amount(50.0)))
-                         .`client made`(Deposit(of=Amount(100.0))).toDTO())
+                JavalinJackson().toJsonString(
+                        History().`client made`(Operation.deposit(of=Amount(100.0)))
+                         .`client made`(Operation.withdrawal(of=Amount(50.0)))
+                         .`client made`(Operation.deposit(of=Amount(100.0))).toDTO())
         )
 
     }
