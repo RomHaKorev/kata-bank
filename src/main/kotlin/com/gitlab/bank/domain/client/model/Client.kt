@@ -11,6 +11,6 @@ class Client(`identified by`: UUID, named: String) {
     }
 
     override fun hashCode(): Int {
-        return name.hashCode()
+        return id.hashCode()
     }
 }

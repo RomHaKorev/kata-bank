@@ -13,8 +13,6 @@ val thenAnotherDate = LocalDateTime.of(1980, 7, 25, 12, 7, 0)
 
 class BankTest {
 
-    val aDate: LocalDateTime = LocalDateTime.of(1975, 2, 17, 12, 7, 0)
-
     @Test
     fun `a client should make a deposit on their account`() {
         val bankAccounts = InMemoryAccounts()
@@ -23,7 +21,7 @@ class BankTest {
 
         bank(GRACE, Operation.deposit(of = Amount(120.0), at=aDate))
 
-        assertThat(bankAccounts.of(GRACE).amount).isEqualTo(Amount(120.0))
+        assertThat(bankAccounts.of(GRACE).amount).isEqualTo(Balance(120.0))
     }
 
     @Test
@@ -34,7 +32,7 @@ class BankTest {
 
         bank(GRACE, Operation.withdrawal(of = Amount(200.0), at = aDate))
 
-        assertThat(bankAccounts.of(GRACE).amount).isEqualTo(Amount(800.0))
+        assertThat(bankAccounts.of(GRACE).amount).isEqualTo(Balance(800.0))
     }
 
 

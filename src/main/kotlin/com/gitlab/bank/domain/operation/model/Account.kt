@@ -8,7 +8,7 @@ class Account private constructor(val owner: Client,
 
     constructor(ownedBy: Client): this(ownedBy, emptyList())
 
-    val amount: Amount
+    val amount: Balance
         get() = operations.sum()
 
     fun make(deposit: Operation): Account {
@@ -23,5 +23,5 @@ class Account private constructor(val owner: Client,
     }
 
 
-    private fun List<Operation>.sum() = fold(Amount(0.0)) { acc, deposit -> deposit + acc}
+    private fun List<Operation>.sum() = fold(Balance(0.0)) { acc, deposit -> deposit + acc}
 }

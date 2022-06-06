@@ -1,5 +1,6 @@
 package com.gitlab.bank.domain.operation.model
 
+import com.gitlab.bank.domain.EntityTest
 import com.gitlab.bank.domain.aDate
 import com.gitlab.bank.infra.client.persistence.stubs.ALISON
 import com.gitlab.bank.infra.client.persistence.stubs.GRACE
@@ -14,14 +15,11 @@ fun Operation.Companion.withdrawal(of: Amount): Operation {
     return withdrawal(of= of, at=aDate)
 }
 
-class AccountTest {
-
-
-
+class AccountTest: EntityTest<Account> {
     @Test
     fun `a new account should be empty`() {
         val account = newAccount()
-        assertThat(account.amount).isEqualTo(Amount(0.0))
+        assertThat(account.amount).isEqualTo(Balance(0.0))
     }
 
     @Test
@@ -30,7 +28,7 @@ class AccountTest {
 
         val accountAfterDeposit = account.make(Operation.deposit(of= Amount(12.0)))
 
-        assertThat(accountAfterDeposit.amount).isEqualTo(Amount(12.0))
+        assertThat(accountAfterDeposit.amount).isEqualTo(Balance(12.0))
     }
 
     @Test
@@ -38,24 +36,16 @@ class AccountTest {
         val account = newAccount(initialSold=200.0)
         val accountAfterDeposit = account.make(Operation.withdrawal(of= Amount(50.0)))
 
-        assertThat(accountAfterDeposit.amount).isEqualTo(Amount(150.0))
+        assertThat(accountAfterDeposit.amount).isEqualTo(Balance(150.0))
     }
 
-    @Test
-    fun `an account should be owned by a single client`() {
-        assertThat(Account(ownedBy= GRACE))
-            .isEqualTo(Account(ownedBy= GRACE))
-
-        assertThat(Account(ownedBy= GRACE))
-            .isNotEqualTo(Account(ownedBy= ALISON))
-
-        assertThat(Account(ownedBy= GRACE).hashCode())
-            .isEqualTo(Account(ownedBy= GRACE).hashCode())
-
-        assertThat(Account(ownedBy= GRACE).hashCode())
-            .isNotEqualTo(Account(ownedBy= ALISON).hashCode())
+    override fun createEqualEntities(): Pair<Account, Account> {
+        return Account(ownedBy= GRACE) to Account(ownedBy= GRACE)
     }
 
+    override fun createNonEqualEntities(): Pair<Account, Account> {
+        return Account(ownedBy= GRACE) to Account(ownedBy= ALISON)
+    }
 
     private fun newAccount(initialSold: Double=0.0): Account {
         val account = Account(ownedBy= GRACE)
@@ -64,3 +54,4 @@ class AccountTest {
         return account
     }
 }
+

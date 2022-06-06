@@ -8,7 +8,7 @@ enum class OperationType {
 }
 
 data class Operation(val type: OperationType, val amount: Amount, val effectiveDate: LocalDateTime) {
-    operator fun plus(balance: Amount): Amount {
+    operator fun plus(balance: Balance): Balance {
         return when(type) {
             OperationType.Deposit -> balance + amount
             OperationType.Withdrawal -> balance - amount

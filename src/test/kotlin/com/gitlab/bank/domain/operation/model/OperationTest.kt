@@ -1,11 +1,12 @@
 package com.gitlab.bank.domain.operation.model
 
+import com.gitlab.bank.domain.ValueObjectTest
 import com.gitlab.bank.domain.aDate
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class DepositTest {
+class OperationTest: ValueObjectTest<Operation> {
     @Test
     fun `create a deposit of a given amount`() {
         val deposit = Operation.deposit(of = Amount(12.0))
@@ -30,12 +31,6 @@ class DepositTest {
         ).isEqualTo(aDate)
     }
 
-    @Test
-    fun `Operation should be a value object`() {
-        assertThat(Operation.deposit(of=Amount(12.0))).isEqualTo(Operation.deposit(of=Amount(12.0)))
-        assertThat(Operation.deposit(of=Amount(63.0))).isNotEqualTo(Operation.deposit(of=Amount(12.0)))
-
-        assertThat(Operation.deposit(of=Amount(12.0))).isEqualTo(Operation.deposit(of=Amount(12.0)))
-        assertThat(Operation.deposit(of=Amount(63.0)).hashCode()).isNotEqualTo(Operation.deposit(of=Amount(12.0)).hashCode())
-    }
+    override fun createValue() = Operation.deposit(of=Amount(12.0))
+    override fun createOtherValue() = Operation.deposit(of=Amount(63.0))
 }

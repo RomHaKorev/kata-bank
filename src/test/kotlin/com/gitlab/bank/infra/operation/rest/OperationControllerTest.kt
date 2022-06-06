@@ -1,6 +1,7 @@
 package com.gitlab.bank.infra.operation.rest
 
 import com.gitlab.bank.domain.operation.model.Amount
+import com.gitlab.bank.domain.operation.model.Balance
 import com.gitlab.bank.infra.Application
 import com.gitlab.bank.infra.operation.rest.resources.DepositDTO
 import com.gitlab.bank.infra.operation.rest.resources.WithdrawalDTO
@@ -28,7 +29,7 @@ class OperationControllerTest {
         val response = client.post("/deposit/${GRACE.id}", JavalinJackson().toJsonString(deposit))
         assertThat(response.code).isEqualTo(200)
 
-        assertThat(accounts.of(GRACE).amount).isEqualTo(Amount(120.0))
+        assertThat(accounts.of(GRACE).amount).isEqualTo(Balance(120.0))
     }
 
     @Test
@@ -47,7 +48,7 @@ class OperationControllerTest {
         val response = client.post("/withdrawal/${GRACE.id}", JavalinJackson().toJsonString(withdrawal))
         assertThat(response.code).isEqualTo(200)
 
-        assertThat(accounts.of(GRACE).amount).isEqualTo(Amount(880.0))
+        assertThat(accounts.of(GRACE).amount).isEqualTo(Balance(880.0))
     }
 
     @Test

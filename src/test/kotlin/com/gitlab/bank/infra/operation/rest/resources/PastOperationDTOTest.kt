@@ -8,14 +8,14 @@ class PastOperationDTOTest {
     @Test
     fun `should map a domain deposit to DTO`() {
         Assertions.assertThat(
-                PastOperation(Operation.deposit(of=Amount(50.0)), balance = Amount(100.0)).toDTO()
+                PastOperation(Operation.deposit(of=Amount(50.0)), balance = Balance(100.0)).toDTO()
         ).isEqualTo(PastOperationDTO(OperationType.Deposit, 100.0, 50.0, "1975-02-17"))
     }
 
     @Test
     fun `should map a domain withdrawal to DTO`() {
         Assertions.assertThat(
-                PastOperation(Operation.withdrawal(of=Amount(50.0)), balance = Amount(100.0)).toDTO()
+                PastOperation(Operation.withdrawal(of=Amount(50.0)), balance = Balance(100.0)).toDTO()
         ).isEqualTo(PastOperationDTO(OperationType.Withdrawal, 100.0, -50.0, "1975-02-17"))
     }
 }

@@ -28,7 +28,6 @@ fun main() {
     val accounts = InMemoryAccounts()
     clients.clients.forEach {
         accounts.create(it)
-        println("${it.name}: ${it.id}")
     }
     val application = Application(accounts, clients) { LocalDateTime.now() }
 

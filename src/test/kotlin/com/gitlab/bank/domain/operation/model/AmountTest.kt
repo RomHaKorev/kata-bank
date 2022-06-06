@@ -1,16 +1,14 @@
 package com.gitlab.bank.domain.operation.model
 
+import com.gitlab.bank.domain.ValueObjectTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.AssertionError
 
 
-class AmountTest {
-    @Test
-    fun `an amount should be a value object`() {
-        assertThat(Amount(12.0)).isEqualTo(Amount(12.0))
-    }
+class AmountTest: ValueObjectTest<Amount> {
+
 
     @Test
     fun `an amount should be summed to another`() {
@@ -29,4 +27,7 @@ class AmountTest {
             Amount(-100.0)
         }
     }
+
+    override fun createValue() = Amount(20.5)
+    override fun createOtherValue() = Amount(12.0)
 }
