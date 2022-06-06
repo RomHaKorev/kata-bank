@@ -20,7 +20,11 @@ class HistoryDTOTest {
     fun `should map domain to DTO`() {
         val aDate: LocalDateTime = LocalDateTime.of(1975, 2, 17, 12, 7, 0)
         Assertions.assertThat(
-                History().`client made`(Operation.deposit(of= Amount(100.0), at=aDate)).toDTO()
-        ).isEqualTo(HistoryDTO(listOf(PastOperationDTO(OperationType.Deposit, 100.0))))
+                History().`client made`(Operation.deposit(of= Amount(100.0), at=aDate))
+                         .`client made`(Operation.withdrawal(of= Amount(20.0), at=aDate)).toDTO()
+        ).isEqualTo(HistoryDTO(listOf(
+                PastOperationDTO(OperationType.Deposit, 100.0, 100.0, "1975-02-17"),
+                PastOperationDTO(OperationType.Withdrawal, 80.0, -20.0, "1975-02-17")
+        )))
     }
 }

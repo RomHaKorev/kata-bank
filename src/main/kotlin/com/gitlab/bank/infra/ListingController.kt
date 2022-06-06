@@ -15,7 +15,10 @@ class ListingController(val getHistoryOf: GetHistoryOf,
         val clientId = UUID.fromString(ctx.pathParam("client-id"))
         clients.findBy(clientId).ifPresentOrElse(
                 { client ->
-                    ctx.result(JavalinJackson().toJsonString(getHistoryOf(client).toDTO()))
+                    val history = getHistoryOf(client)
+                    println(history)
+                    val body = JavalinJackson().toJsonString(history.toDTO())
+                    ctx.result(body)
                     ctx.status(200)
                 })
         {

@@ -12,7 +12,10 @@ class InMemoryAccounts: Accounts {
 
     val aDate: LocalDateTime = LocalDateTime.of(1975, 2, 17, 12, 7, 0)
 
-    override fun of(client: Client) = accounts.first { it.owner == client }
+    override fun of(client: Client): Account {
+        return accounts.first { it.owner == client }
+    }
+
     override fun commit(account: Account) {
         accounts.removeIf { it == account }
         accounts.add(account)
