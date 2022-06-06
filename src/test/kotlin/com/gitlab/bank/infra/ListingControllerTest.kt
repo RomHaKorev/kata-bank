@@ -1,13 +1,12 @@
 package com.gitlab.bank.infra
 
-import com.gitlab.bank.domain.operation.model.Amount
-import com.gitlab.bank.domain.operation.model.Deposit
-import com.gitlab.bank.domain.operation.model.GRACE
-import com.gitlab.bank.domain.operation.model.Withdrawal
+import com.gitlab.bank.domain.operation.model.*
 import com.gitlab.bank.domain.operation.stubs.InMemoryAccounts
+import com.gitlab.bank.infra.resources.toDTO
 import com.gitlab.bank.infra.stubs.InMemoryClients
+import io.javalin.plugin.json.JavalinJackson
 import io.javalin.testtools.JavalinTest
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ListingControllerTest {
@@ -23,6 +22,13 @@ class ListingControllerTest {
         accounts.commit(account)
 
         val response = client.get("/history/${GRACE.id}")
-        Assertions.assertThat(response.code).isEqualTo(200)
+        assertThat(response.code).isEqualTo(200)
+
+        assertThat(response.body?.string()).isEqualTo(
+                JavalinJackson().toJsonString(History().`client made`(Deposit(of=Amount(100.0)))
+                         .`client made`(Withdrawal(of=Amount(50.0)))
+                         .`client made`(Deposit(of=Amount(100.0))).toDTO())
+        )
+
     }
 }
