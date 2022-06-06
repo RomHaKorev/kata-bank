@@ -22,8 +22,6 @@ class Bank(private val accounts: Accounts): MakeADeposit, MakeAWithdrawal {
     }
 
     fun `get history of`(client: Client): List<Operation> {
-        val account = accounts.of(client)
-        return account.operations
+        TODO("need history")
     }
-
 }
