@@ -1,8 +1,8 @@
 package com.gitlab.bank.domain
 
-import com.gitlab.bank.domain.client.model.Client
 import com.gitlab.bank.domain.operation.model.*
-import com.gitlab.bank.domain.operation.stubs.InMemoryAccounts
+import com.gitlab.bank.infra.stubs.GRACE
+import com.gitlab.bank.infra.stubs.InMemoryAccounts
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

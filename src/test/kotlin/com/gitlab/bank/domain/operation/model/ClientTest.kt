@@ -1,17 +1,16 @@
 package com.gitlab.bank.domain.operation.model
 
 import com.gitlab.bank.domain.client.model.Client
+import com.gitlab.bank.infra.stubs.ALISON
+import com.gitlab.bank.infra.stubs.GRACE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.util.*
 
 
-private fun String.id(): UUID = UUID.nameUUIDFromBytes(this.toByteArray())
 
 
-val KAREN = Client(`identified by` = "Karen O".id(), named="Karen O")
-val GRACE = Client(`identified by` = "Grace Slick".id(), named="Grace Slick")
-val ALISON = Client(`identified by` = "Alison Mosshart".id(), named="Alison Mosshart")
+
 
 class ClientTest {
 

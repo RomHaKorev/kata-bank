@@ -3,11 +3,13 @@ package com.gitlab.bank.infra
 import com.gitlab.bank.domain.Bank
 import com.gitlab.bank.domain.operation.spi.Accounts
 import com.gitlab.bank.domain.client.spi.Clients
+import com.gitlab.bank.infra.stubs.InMemoryAccounts
+import com.gitlab.bank.infra.stubs.InMemoryClients
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder
 
 class Application(private val accounts: Accounts, private val bankClients: Clients) {
-    val app = Javalin.create().routes {
+    val runner = Javalin.create().routes {
         val bank = Bank(accounts)
         val operationController = OperationController(bank, bankClients)
         val listingController = ListingController(bank, bankClients)
@@ -15,4 +17,17 @@ class Application(private val accounts: Accounts, private val bankClients: Clien
         ApiBuilder.post("/withdrawal/{client-id}", operationController::withdrawalHandler)
         ApiBuilder.get("/history/{client-id}", listingController::historyHandler)
     }
+}
+
+
+fun main() {
+    val clients = InMemoryClients()
+    val accounts = InMemoryAccounts()
+    clients.clients.forEach {
+        accounts.create(it)
+        println("${it.name}: ${it.id}")
+    }
+    val application = Application(accounts, clients)
+
+    application.runner.start(8080)
 }

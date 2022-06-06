@@ -1,5 +1,7 @@
 package com.gitlab.bank.domain.operation.model
 
+import com.gitlab.bank.infra.stubs.ALISON
+import com.gitlab.bank.infra.stubs.GRACE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

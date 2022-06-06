@@ -1,4 +1,4 @@
-package com.gitlab.bank.domain.operation.stubs
+package com.gitlab.bank.infra.stubs
 
 import com.gitlab.bank.domain.operation.model.Account
 import com.gitlab.bank.domain.operation.model.Amount

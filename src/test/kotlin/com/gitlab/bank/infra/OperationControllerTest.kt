@@ -1,12 +1,12 @@
 package com.gitlab.bank.infra
 
-import com.gitlab.bank.domain.operation.stubs.InMemoryAccounts
 import com.gitlab.bank.domain.operation.model.Amount
-import com.gitlab.bank.domain.operation.model.GRACE
-import com.gitlab.bank.domain.operation.model.KAREN
 import com.gitlab.bank.infra.resources.DepositDTO
 import com.gitlab.bank.infra.resources.WithdrawalDTO
+import com.gitlab.bank.infra.stubs.GRACE
+import com.gitlab.bank.infra.stubs.InMemoryAccounts
 import com.gitlab.bank.infra.stubs.InMemoryClients
+import com.gitlab.bank.infra.stubs.KAREN
 import io.javalin.plugin.json.JavalinJackson
 import io.javalin.testtools.JavalinTest
 import org.assertj.core.api.Assertions.assertThat
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test
 class OperationControllerTest {
 
     private val accounts = InMemoryAccounts()
-    private val app = Application(accounts, InMemoryClients()).app
+    private val app = Application(accounts, InMemoryClients()).runner
 
     @Test
     fun `Should make a deposit`() = JavalinTest.test(app) { _, client ->
