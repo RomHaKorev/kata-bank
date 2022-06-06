@@ -9,8 +9,10 @@ import io.javalin.apibuilder.ApiBuilder
 class Application(private val accounts: Accounts, private val bankClients: Clients) {
     val app = Javalin.create().routes {
         val bank = Bank(accounts)
-        val controller = OperationController(bank, bank, bankClients)
-        ApiBuilder.post("/deposit/{client-id}", controller::depositHandler)
-        ApiBuilder.post("/withdrawal/{client-id}", controller::withdrawalHandler)
+        val operationController = OperationController(bank, bank, bankClients)
+        val listingController = ListingController(bank, bankClients)
+        ApiBuilder.post("/deposit/{client-id}", operationController::depositHandler)
+        ApiBuilder.post("/withdrawal/{client-id}", operationController::withdrawalHandler)
+        ApiBuilder.get("/history/{client-id}", listingController::historyHandler)
     }
 }

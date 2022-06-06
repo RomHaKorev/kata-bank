@@ -42,7 +42,7 @@ class BankTest {
 
         val bank = Bank(bankAccounts)
 
-        val history = bank.`get history of`(GRACE)
+        val history = bank(GRACE)
 
         assertThat(history.isEmpty).isTrue
     }
@@ -58,7 +58,7 @@ class BankTest {
         bank(GRACE, Deposit(of = Amount(80.0)))
         bank(GRACE, Withdrawal(of = Amount(50.0)))
 
-        val history = bank.`get history of`(GRACE)
+        val history = bank(GRACE)
 
         assertThat(history).isEqualTo(
                 History().`client made`(Deposit(of = Amount(120.0)))

@@ -15,13 +15,15 @@ class InMemoryAccounts: Accounts {
         accounts.add(account)
     }
 
-    fun create(client: Client, initialSold: Double=0.0) {
+    fun create(client: Client, initialSold: Double=0.0): Account {
         val account = Account(ownedBy = client)
         if (initialSold != 0.0) {
-            accounts.add(account.make(Deposit(of = Amount(initialSold))))
-            return
+            val newAccount = account.make(Deposit(of = Amount(initialSold)))
+            accounts.add(newAccount)
+            return newAccount
         }
         accounts.add(account)
+        return account
     }
 
 }
