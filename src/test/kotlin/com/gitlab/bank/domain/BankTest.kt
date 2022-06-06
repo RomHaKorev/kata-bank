@@ -1,5 +1,6 @@
 package com.gitlab.bank.domain
 
+import com.gitlab.bank.domain.client.model.Client
 import com.gitlab.bank.domain.operation.model.*
 import com.gitlab.bank.domain.operation.stubs.InMemoryAccounts
 import org.assertj.core.api.Assertions.assertThat
@@ -36,15 +37,13 @@ class BankTest {
 
     @Test
     fun `a new client should an empty history of their operation`() {
-        /*val bankAccounts = InMemoryAccounts()
+        val bankAccounts = InMemoryAccounts()
         bankAccounts.create(GRACE)
 
         val bank = Bank(bankAccounts)
 
         val history = bank.`get history of`(GRACE)
 
-        assertThat(history).isEqualTo(History.EMPTY)*/
-
-        TODO("need history")
+        assertThat(history).isEmpty()
     }
 }

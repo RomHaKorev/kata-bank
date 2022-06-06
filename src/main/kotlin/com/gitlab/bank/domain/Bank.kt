@@ -4,6 +4,7 @@ import com.gitlab.bank.domain.operation.api.MakeADeposit
 import com.gitlab.bank.domain.operation.api.MakeAWithdrawal
 import com.gitlab.bank.domain.client.model.Client
 import com.gitlab.bank.domain.operation.model.Deposit
+import com.gitlab.bank.domain.operation.model.Operation
 import com.gitlab.bank.domain.operation.model.Withdrawal
 import com.gitlab.bank.domain.operation.spi.Accounts
 
@@ -19,4 +20,10 @@ class Bank(private val accounts: Accounts): MakeADeposit, MakeAWithdrawal {
         val accountAfterDeposit = account.make(withdrawal)
         accounts.commit(accountAfterDeposit)
     }
+
+    fun `get history of`(client: Client): List<Operation> {
+        val account = accounts.of(client)
+        return account.operations
+    }
+
 }
