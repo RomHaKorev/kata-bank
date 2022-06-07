@@ -34,3 +34,24 @@ The expected result is a *service API*, and its underlying implementation, that 
 **In order to** check my operations \
 **As a** bank client \
 **I want to** see the history (operation, date, amount, balance) of my operations
+
+
+
+## Project environment
+
+### Tests
+```
+mvn test
+```
+
+### Run
+```
+mvn clean package
+java -jar target/bank-sgcib-1.0-SNAPSHOT-jar-with-dependencies.jar 
+```
+
+The server will run on port 8080
+
+The application is running with in-memory persistence. \
+There is an existing client referenced with the UUID 994daf74-c079-3b4f-8fe5-43b4afe7be36 \
+You can use it to test the API.
