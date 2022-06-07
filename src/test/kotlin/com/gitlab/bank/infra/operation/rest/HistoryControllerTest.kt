@@ -9,6 +9,7 @@ import com.gitlab.bank.infra.client.persistence.stubs.InMemoryClients
 import com.gitlab.bank.infra.client.persistence.stubs.KAREN
 import io.javalin.plugin.json.JavalinJackson
 import io.javalin.testtools.JavalinTest
+import okhttp3.OkHttp
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -26,13 +27,12 @@ class HistoryControllerTest {
         accounts.commit(account)
 
         val response = client.get("/history/${GRACE.id}")
-        assertThat(response.code).isEqualTo(200)
 
-        assertThat(response.body?.string()).isEqualTo(
-                JavalinJackson().toJsonString(
-                        History().`client made`(Operation.deposit(of=Amount(100.0)))
+        response.shouldBeOK()
+        response.shouldBe(
+                History().`client made`(Operation.deposit(of=Amount(100.0)))
                          .`client made`(Operation.withdrawal(of=Amount(50.0)))
-                         .`client made`(Operation.deposit(of=Amount(100.0))).toDTO())
+                         .`client made`(Operation.deposit(of=Amount(100.0))).toDTO()
         )
 
     }
@@ -40,6 +40,22 @@ class HistoryControllerTest {
     @Test
     fun `an unknown user cannot get an history`() = JavalinTest.test(app) { _, client ->
         val response = client.get("/history/${KAREN.id}")
-        assertThat(response.code).isEqualTo(401)
+        response.shouldBeUnAuthorized()
     }
+}
+
+
+
+fun okhttp3.Response.shouldBeOK() {
+    assertThat(this.code).isEqualTo(200)
+}
+
+fun okhttp3.Response.shouldBeUnAuthorized() {
+    assertThat(this.code).isEqualTo(401)
+}
+
+fun okhttp3.Response.shouldBe(expected: Any) {
+    assertThat(body?.string()).isEqualTo(
+            JavalinJackson().toJsonString(expected)
+    )
 }

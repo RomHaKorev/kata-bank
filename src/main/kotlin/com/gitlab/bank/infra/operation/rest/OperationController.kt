@@ -17,23 +17,26 @@ class OperationController(val `make an operation`: MakeAnOperation,
 
     fun depositHandler(ctx: Context) {
         val operation = ctx.bodyAsClass<DepositDTO>().toDomain(now())
-        clientOperation(ctx, operation)
+        processIfClientExists(ctx, operation)
     }
 
     fun withdrawalHandler(ctx: Context) {
         val operation = ctx.bodyAsClass<WithdrawalDTO>().toDomain(now())
-        clientOperation(ctx, operation)
+        processIfClientExists(ctx, operation)
     }
 
-    private fun clientOperation(ctx: Context, operation: Operation) {
+    private fun processIfClientExists(ctx: Context, operation: Operation) {
         val clientId = UUID.fromString(ctx.pathParam("client-id"))
         clients.findBy(clientId).ifPresentOrElse(
+        /* action */
                 { client ->
                     `make an operation`(client, operation)
                     ctx.status(200)
-                })
-        {
-            ctx.status(401)
-        }
+                },
+        /* emptyAction */
+                {
+                    ctx.status(401)
+                }
+        )
     }
 }
