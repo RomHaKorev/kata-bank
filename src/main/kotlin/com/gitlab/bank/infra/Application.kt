@@ -4,9 +4,9 @@ import com.gitlab.bank.domain.account.HistoryRequestService
 import com.gitlab.bank.domain.account.OperationProcessingService
 import com.gitlab.bank.domain.operation.spi.AccountRepository
 import com.gitlab.bank.domain.client.spi.ClientRepository
-import com.gitlab.bank.infra.accounts.rest.HistoryController
-import com.gitlab.bank.infra.accounts.rest.OperationController
-import com.gitlab.bank.infra.accounts.persistence.InMemoryAccountRepository
+import com.gitlab.bank.infra.account.rest.HistoryController
+import com.gitlab.bank.infra.account.rest.OperationController
+import com.gitlab.bank.infra.account.persistence.InMemoryAccountRepository
 import com.gitlab.bank.infra.client.persistence.InMemoryClientRepository
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder

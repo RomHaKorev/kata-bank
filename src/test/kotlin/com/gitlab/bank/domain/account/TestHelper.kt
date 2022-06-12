@@ -4,7 +4,7 @@ import com.gitlab.bank.domain.account.api.MakeAnOperation
 import com.gitlab.bank.domain.account.model.Operation
 import com.gitlab.bank.domain.client.model.Client
 import com.gitlab.bank.domain.operation.api.GetHistoryOf
-import com.gitlab.bank.infra.accounts.persistence.InMemoryAccountRepository
+import com.gitlab.bank.infra.account.persistence.InMemoryAccountRepository
 import com.gitlab.bank.infra.client.persistence.GRACE
 
 

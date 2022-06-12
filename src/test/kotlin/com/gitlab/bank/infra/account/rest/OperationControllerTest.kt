@@ -1,11 +1,11 @@
-package com.gitlab.bank.infra.accounts.rest
+package com.gitlab.bank.infra.account.rest
 
 import com.gitlab.bank.domain.account.model.Balance
 import com.gitlab.bank.domain.client.ClientRepositoryFake
 import com.gitlab.bank.infra.Application
-import com.gitlab.bank.infra.accounts.persistence.InMemoryAccountRepository
-import com.gitlab.bank.infra.accounts.rest.resources.DepositDTO
-import com.gitlab.bank.infra.accounts.rest.resources.WithdrawalDTO
+import com.gitlab.bank.infra.account.persistence.InMemoryAccountRepository
+import com.gitlab.bank.infra.account.rest.resources.DepositDTO
+import com.gitlab.bank.infra.account.rest.resources.WithdrawalDTO
 import com.gitlab.bank.infra.client.persistence.GRACE
 import com.gitlab.bank.infra.client.persistence.KAREN
 import io.javalin.plugin.json.JavalinJackson

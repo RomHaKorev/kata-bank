@@ -1,9 +1,9 @@
-package com.gitlab.bank.infra.accounts.rest
+package com.gitlab.bank.infra.account.rest
 
 import com.gitlab.bank.domain.account.model.*
 import com.gitlab.bank.infra.Application
-import com.gitlab.bank.infra.accounts.persistence.InMemoryAccountRepository
-import com.gitlab.bank.infra.accounts.rest.resources.toDTO
+import com.gitlab.bank.infra.account.persistence.InMemoryAccountRepository
+import com.gitlab.bank.infra.account.rest.resources.toDTO
 import com.gitlab.bank.infra.client.persistence.GRACE
 import com.gitlab.bank.infra.client.persistence.InMemoryClientRepository
 import com.gitlab.bank.infra.client.persistence.KAREN

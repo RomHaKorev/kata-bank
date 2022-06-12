@@ -1,4 +1,4 @@
-package com.gitlab.bank.infra.accounts.rest
+package com.gitlab.bank.infra.account.rest
 
 import java.time.LocalDateTime
 

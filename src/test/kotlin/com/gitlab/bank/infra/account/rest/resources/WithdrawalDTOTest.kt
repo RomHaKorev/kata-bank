@@ -1,4 +1,4 @@
-package com.gitlab.bank.infra.accounts.rest.resources
+package com.gitlab.bank.infra.account.rest.resources
 
 import com.gitlab.bank.domain.account.model.Amount
 import com.gitlab.bank.domain.account.model.Operation

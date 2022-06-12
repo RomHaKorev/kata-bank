@@ -1,4 +1,4 @@
-package com.gitlab.bank.infra.accounts.persistence
+package com.gitlab.bank.infra.account.persistence
 
 import com.gitlab.bank.domain.account.model.Account
 import com.gitlab.bank.domain.account.model.Amount

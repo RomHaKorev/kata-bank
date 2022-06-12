@@ -1,8 +1,8 @@
-package com.gitlab.bank.infra.accounts.rest
+package com.gitlab.bank.infra.account.rest
 
 import com.gitlab.bank.domain.client.spi.ClientRepository
 import com.gitlab.bank.domain.operation.api.GetHistoryOf
-import com.gitlab.bank.infra.accounts.rest.resources.toDTO
+import com.gitlab.bank.infra.account.rest.resources.toDTO
 import io.javalin.http.Context
 import io.javalin.plugin.json.JavalinJackson
 import java.util.*
