@@ -1,8 +1,6 @@
 package com.gitlab.bank.domain.utils
 
-import com.gitlab.bank.domain.client.model.Client
 import java.time.LocalDateTime
-import java.util.*
 
 
 val aDate: LocalDateTime = LocalDateTime.of(1975, 2, 17, 12, 7, 0)

@@ -1,22 +1,26 @@
 package com.gitlab.bank.infra
 
-import com.gitlab.bank.domain.account.HistoryRequestService
-import com.gitlab.bank.domain.account.OperationProcessingService
-import com.gitlab.bank.domain.operation.spi.AccountRepository
-import com.gitlab.bank.domain.client.spi.ClientRepository
-import com.gitlab.bank.infra.account.rest.HistoryController
-import com.gitlab.bank.infra.account.rest.OperationController
-import com.gitlab.bank.infra.account.persistence.InMemoryAccountRepository
-import com.gitlab.bank.infra.client.persistence.InMemoryClientRepository
+import com.gitlab.bank.domain.HistoryRequestService
+import com.gitlab.bank.domain.OperationProcessingService
+import com.gitlab.bank.domain.spi.AccountRepository
+import com.gitlab.bank.domain.spi.ClientRepository
+import com.gitlab.bank.infra.rest.HistoryController
+import com.gitlab.bank.infra.rest.OperationController
+import com.gitlab.bank.infra.persistence.InMemoryAccountRepository
+import com.gitlab.bank.infra.persistence.InMemoryClientRepository
+import com.gitlab.bank.infra.security.CheckClientExistenceService
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder
 import java.time.LocalDateTime
 
 class Application(private val accounts: AccountRepository, private val bankClients: ClientRepository, now: () -> LocalDateTime) {
-    val runner = Javalin.create().routes {
+    val runner: Javalin = Javalin.create().routes {
         val makeAnOperation = OperationProcessingService(accounts)
         val getHistoryOf = HistoryRequestService(accounts)
-        val operationController = OperationController(makeAnOperation, bankClients, now)
+
+        val checkAuthorizationBeforeAction = CheckClientExistenceService(bankClients)
+
+        val operationController = OperationController(makeAnOperation, checkAuthorizationBeforeAction, now)
         val historyController = HistoryController(getHistoryOf, bankClients)
         ApiBuilder.post("/deposit/{client-id}", operationController::depositHandler)
         ApiBuilder.post("/withdrawal/{client-id}", operationController::withdrawalHandler)
